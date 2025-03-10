@@ -125,6 +125,9 @@ use the "xen" feature of the "%{crate}" crate.
 
 %prep
 %autosetup -n %{crate}-%{version} -p1
+%if 0%{?fedora} == 42
+%patch -p1 < vhost-device-gpu-f42-fix.diff
+%endif
 %cargo_prep
 
 %generate_buildrequires
