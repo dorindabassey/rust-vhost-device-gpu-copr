@@ -18,9 +18,18 @@ Patch:          vhost-device-gpu-fix-metadata.diff
 # Upstream doesn't provide man pages
 Patch:          man-page.patch
 
+# Conditionally apply additional patch on Fedora 42 to allow
+# tempfile <= 3.16.0 for now
+%if 0%{?fedora} == 42
+Patch:          vhost-device-gpu-f42-fix.diff
+%endif
+
 # Package dependencies vmm-sys-util not built for s390x
 # Upstream Package dependency vm-memory only support 64bit
-ExcludeArch: %{ix86} s390x
+# The spec fail to build for ppc64le and s390x, due to
+# the package dependency rust-rutabaga-gfx not built for
+# these architecture.
+ExcludeArch: %{ix86} s390x ppc64le
 
 BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:  virglrenderer-devel

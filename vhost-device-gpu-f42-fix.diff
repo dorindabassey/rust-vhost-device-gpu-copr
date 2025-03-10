@@ -1,0 +1,11 @@
+--- vhost-device-gpu-0.1.0/Cargo.toml	1970-01-01T00:00:01+00:00
++++ vhost-device-gpu-0.1.0/Cargo.toml	2025-03-10T23:17:38.189122+00:00
+@@ -70,7 +70,7 @@
+ version = "0.3.0"
+ 
+ [dev-dependencies.tempfile]
+-version = "3.16"
++version = "3.15"
+ 
+ [dev-dependencies.virtio-queue]
+ version = "0.14"
