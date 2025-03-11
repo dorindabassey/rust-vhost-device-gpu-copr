@@ -1,6 +1,6 @@
 --- vhost-device-gpu-0.1.0/Cargo.toml	1970-01-01T00:00:01+00:00
-+++ vhost-device-gpu-0.1.0/Cargo.toml	2025-03-10T09:23:15.800990+00:00
-@@ -64,7 +64,7 @@
++++ vhost-device-gpu-0.1.0/Cargo.toml	2025-03-11T15:25:54.375483+00:00
+@@ -64,13 +64,13 @@
  version = "1.5"
  
  [dev-dependencies.mockall]
@@ -9,3 +9,10 @@
  
  [dev-dependencies.rusty-fork]
  version = "0.3.0"
+ 
+ [dev-dependencies.tempfile]
+-version = "3.16"
++version = "3.15"
+ 
+ [dev-dependencies.virtio-queue]
+ version = "0.14"

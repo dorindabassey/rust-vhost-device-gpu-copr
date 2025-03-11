@@ -12,17 +12,11 @@ License:        Apache-2.0 OR BSD-3-Clause
 URL:            https://crates.io/crates/vhost-device-gpu
 Source:         %{crates_source}
 # Manually created patch for downstream crate metadata changes
-# allow mockall 0.11.4 for now
+# allow mockall 0.11.4 and tempfile <= 3.16.0 for now
 Patch:          vhost-device-gpu-fix-metadata.diff
 
 # Upstream doesn't provide man pages
 Patch:          man-page.patch
-
-# Conditionally apply additional patch on Fedora 42 to allow
-# tempfile <= 3.16.0 for now
-%if 0%{?fedora} == 42
-Patch:          vhost-device-gpu-f42-fix.diff
-%endif
 
 # Package dependencies vmm-sys-util not built for s390x
 # Upstream Package dependency vm-memory only support 64bit
@@ -125,9 +119,6 @@ use the "xen" feature of the "%{crate}" crate.
 
 %prep
 %autosetup -n %{crate}-%{version} -p1
-%if 0%{?fedora} == 42
-%patch -p1 < vhost-device-gpu-f42-fix.diff
-%endif
 %cargo_prep
 
 %generate_buildrequires
