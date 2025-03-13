@@ -13,10 +13,14 @@ License:        Apache-2.0 OR BSD-3-Clause
 URL:            https://crates.io/crates/vhost-device-gpu
 Source0:        %{crates_source}
 # Manually created patch for downstream crate metadata changes
+%if %{without bundled_rust_deps}
 # allow mockall 0.11.4 and tempfile <= 3.16.0 for now
 Patch:          vhost-device-gpu-fix-metadata.diff
+%endif
 
 %if %{with bundled_rust_deps}
+BuildRequires: clang-devel
+
 # The vendor tarball is created using cargo-vendor-filterer to remove Windows
 # related files (https://github.com/cgwalters/cargo-vendor-filterer)
 #   spectool -g rust-vhost-device-gpu.spec
@@ -90,6 +94,7 @@ License: (Apache-2.0 OR BSD-3-Clause) AND ((MIT OR Apache-2.0) AND Unicode-DFS-2
 %{_bindir}/vhost-device-gpu
 %{_mandir}/man1/*
 
+%if %{without bundled_rust_deps}
 %package        devel
 Summary:        %{summary}
 BuildArch:      noarch
@@ -144,6 +149,7 @@ use the "xen" feature of the "%{crate}" crate.
 
 %files       -n %{name}+xen-devel
 %ghost %{crate_instdir}/Cargo.toml
+%endif
 
 %prep
 # Source1 is vendored dependencies
